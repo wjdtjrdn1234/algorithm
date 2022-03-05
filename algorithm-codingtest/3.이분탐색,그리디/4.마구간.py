@@ -2,36 +2,45 @@
 # sys.stdin=open("input.txt","rt")
 
 
-def count(capacity): #몇장의 dvd가 필요한지 반환
-    cnt=1 #dvd 수
-    sum=0 #dvd에 저장되는 노래용량
-    for x in music:
-        if sum+x>capacity: #얼마까지의 용량이 dvd에 삽입이 가능한지 확인
+def Count(len):
+    cnt=1 #말 배치수
+    ep=Line[0] #말이 마지막에 배치된 지점
+    for i in range(1, n):
+        if Line[i]-ep>=len: #말 사이의 간격이 ,  조건이 만족하는지 확인
             cnt+=1
-            sum=x # 새로운 dvd를 반환하고 ,거기 초기값을 x
-        else:
-            sum+=x
+            ep=Line[i]
     return cnt
 
-n,m = map(int,input().split())
-music = list(map(int,input().split()))
+n, c=map(int, input().split())
+Line=[]
+for _ in range(n):
+    tmp=int(input())
+    Line.append(tmp)
+Line.sort()
 lt=1
-rt=sum(music)
-res=0 #결과값=용량
-
+rt=Line[n-1]
 while lt<=rt:
-    mid = (lt+rt)//2
-    if count(mid)<=m: #조건에 만족하는 dvd수보다 적게 저장이 가능하면
+    mid=(lt+rt)//2
+    if Count(mid)>=c:#mid:가장 가까운 두말사이의 거리
         res=mid
-        rt=mid-1 #최적의해를 구하기위해 범위를 좁힘
-    else: #용량이 너무 작다면
-        lt=mid+1
+        lt=mid+1 #최적의 해를 구함
+    else:
+        rt=mid-1
+
 print(res)
 
 
 
 
-#lt=1(최소시간노래) , rt=45(노래를 dvd한곳에 담았을경우)
+
+
+
+
+
+
+
+
+#lt=1(최소시간노래) , rt=45(노래를 dvd한곳에 담았을경우)->dvd용량
 #중간값이 답이되면 -> 범위를 작은값으로 좁힘 (최적의해를 찾기위해)
 
 
