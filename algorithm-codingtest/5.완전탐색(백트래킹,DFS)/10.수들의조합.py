@@ -26,17 +26,17 @@ print(cnt)
 
 
 #라이브러리 이용
-import itertools as it
-
-n, k=map(int, input().split())
-a=list(map(int, input().split()))
-m=int(input())
-cnt=0
-
-for x in it.combinations(a, k): #조합 a리스트에서 k개 뽑기
-    if sum(x)%m==0:
-        cnt+=1
-print(cnt)
+# import itertools as it
+#
+# n, k=map(int, input().split())
+# a=list(map(int, input().split()))
+# m=int(input())
+# cnt=0
+#
+# for x in it.combinations(a, k): #조합 a리스트에서 k개 뽑기
+#     if sum(x)%m==0:
+#         cnt+=1
+# print(cnt)
 
 
 

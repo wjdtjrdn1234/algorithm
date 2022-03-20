@@ -2,37 +2,28 @@ import sys
 import heapq
 import heapq as hq
 from collections import deque
-# sys.stdin=open("input.txt","rt")
 
 def DFS(v):
-    global cnt, path
+    global cnt
     if v == n:
         cnt += 1
-        for x in path:
-            print(x, end=' ')
-        print()
     else:
         for i in range(1, n + 1):
             if g[v][i] == 1 and ch[i] == 0:
                 ch[i] = 1
-                path.append(i)
                 DFS(i)
-                path.pop()
-                ch[i] = 0
+                ch[i] = 0 #뒤로빽
 
-if __name__ == "__main__":
-    n, m = map(int, input().split())
-    g = [[0] * (n + 1) for _ in range(n + 1)]
-    ch = [0] * (n + 1)
-    for i in range(m):
-        a, b = map(int, input().split())
-        g[a][b] = 1
-    cnt = 0
-    ch[1] = 1
-    path = list()
-    path.append(1)
-    DFS(1)
-    print(cnt)
+n, m = map(int, input().split())
+g = [[0] * (n + 1) for _ in range(n + 1)]
+ch = [0] * (n + 1)
+for i in range(m):
+    a, b = map(int, input().split())
+    g[a][b] = 1
+cnt = 0
+ch[1] = 1
+DFS(1)
+print(cnt)
 
 #방문한노드는 방문해다고 체크
 #d(1)에서 5가닥으로 뻣음 ,연결되고 방문안된곳으로 이동
