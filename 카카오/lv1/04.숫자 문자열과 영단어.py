@@ -4,8 +4,8 @@ from collections import deque
 from collections import defaultdict
 sys.setrecursionlimit(10**6)
 
+
 def solution(s):
-    answer = 0
     table = {
         "zero" : "0",
         "one" : "1",
@@ -16,11 +16,15 @@ def solution(s):
         "six" : "6",
         "seven" : "7",
         "eight" : "8",
-        "nine" : "9"}
-    for key, value in table.items():
-        s = s.replace(key, value)
+        "nine" : "9"
+    }
+    answer = ''
+    for key,value in table.items():
+        s = s.replace(key,value)
     answer = int(s)
     return answer
+
+
 # def solution(s):
 #     answer = ''
 #     for i in range(len(s)):
