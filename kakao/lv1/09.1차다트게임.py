@@ -3,15 +3,35 @@ import heapq as hq
 from collections import deque
 from collections import defaultdict
 sys.setrecursionlimit(10**6)
-def solution(n, arr1, arr2):
-    answer = []
-    for i,j in zip(arr1,arr2):
-        a12 = bin(i|j)[2:]
-        a12=a12.rjust(n,'0')
-        a12=a12.replace('1','#')
-        a12=a12.replace('0',' ')
-        answer.append(a12)
-    return answer
+
+def solution(dartResult):
+    n = ''
+    score = []
+    for i in dartResult:
+        if i.isdigit():
+            n += i
+        elif i == 'S':
+            n = int(n) ** 1
+            score.append(n)
+            n = ''
+        elif i == 'D':
+            n = int(n) ** 2
+            score.append(n)
+            n = ''
+        elif i == 'T':
+            n = int(n) ** 3
+            score.append(n)
+            n = ''
+        elif i == '*':
+            if len(score) > 1:
+                score[-2] = score[-2] * 2
+                score[-1] = score[-1] * 2
+            else:
+                score[-1] = score[-1] * 2
+        elif i == '#':
+            score[-1] = score[-1] * -1
+
+    return sum(score)
 
 
 #bin: 10진수->2진수 '0b1010'
