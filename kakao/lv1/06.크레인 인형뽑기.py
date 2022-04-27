@@ -24,10 +24,6 @@ def solution(board, moves):
 
 
 
-    # for w in new_id:
-    #     if w.isalpha() == False and w.isdigit() == False and w != '-' and w != '_' and w != '.':
-    #         new_id = new_id.replace(w,"")
-    # answer = new_id
 
 
 

@@ -3,18 +3,21 @@ import heapq as hq
 from collections import deque
 from collections import defaultdict
 sys.setrecursionlimit(10**6)
+
+
 def solution(N, stages):
     result = {}
-    denominator = len(stages)
-    for stage in range(1, N+1):
-        if denominator != 0:
-            count = stages.count(stage)
-            result[stage] = count / denominator
-            denominator -= count
+    candidate = len(stages)
+
+    for i in range(1, N + 1):
+        if candidate != 0:
+            num = stages.count(i)
+            result[i] = num / candidate
+            candidate -= num
         else:
-            result[stage] = 0
-    print(result) #result.sort(key=lambda x:-x[1]) -> dictionary는 .sort() 불가능
-    return sorted(result, key=lambda x : result[x], reverse=True) #sorted -> 원솔르 배열로 담아서 sort
+            result[i] = 0
+    print(result)  # result.sort(key=lambda x:-x[1]) -> dictionary는 .sort() 불가능
+    return sorted(result, key=lambda x: result[x], reverse=True) #sorted -> 원소를 배열로 담아서 sort //정렬기준 result[x] //출력은 x
 
 
 
