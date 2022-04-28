@@ -4,29 +4,16 @@ from collections import deque
 from collections import defaultdict
 sys.setrecursionlimit(10**6)
 
-def solution(s):
-    answer = ''
-    new_list = s.split(' ')
-    for word in new_list:
-        for i in range(len(word)):
-            if i%2==0:
-                answer+=word[i].upper()
-            else:
-                answer+=word[i].lower()
-        answer+=' '
-    print(answer)
-    return answer[:-1]
 
-# def solution(s, n):
-#     answer = ''
-#     for x in s:
-#         if x ==' ':
-#             answer+=x
-#         elif ord(x)+n<123:
-#             answer += chr(ord(x)+n)
-#         else:
-#             answer += chr(ord(x)+n-26)
-#     return answer
+def solution(n):
+    answer = 0
+
+    if int(n ** (1 / 2)) == n ** (1 / 2):  # n의 제곱근
+        return (n ** (1 / 2) + 1) ** 2
+    else:
+        return -1
+
+
 
 
 

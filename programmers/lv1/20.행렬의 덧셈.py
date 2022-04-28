@@ -3,26 +3,18 @@ import heapq as hq
 from collections import deque
 from collections import defaultdict
 sys.setrecursionlimit(10**6)
-def solution(answers):
-    pattern1 = [1,2,3,4,5]
-    pattern2 = [2,1,2,3,2,4,2,5]
-    pattern3 = [3,3,1,1,2,2,4,4,5,5]
-    score = [0, 0, 0]
-    result = []
 
-    for idx, answer in enumerate(answers):
-        if answer == pattern1[idx%len(pattern1)]:
-            score[0] += 1
-        if answer == pattern2[idx%len(pattern2)]:
-            score[1] += 1
-        if answer == pattern3[idx%len(pattern3)]:
-            score[2] += 1
 
-    for idx, s in enumerate(score):
-        if s == max(score):
-            result.append(idx+1)
+def solution(arr1, arr2):
+    answer = []
 
-    return result
+    for i in range(len(arr1)):
+        arr_sum = []
+        for j in range(len(arr1[0])):
+            arr_sum.append(arr1[i][j] + arr2[i][j])
+        answer.append(arr_sum)
+
+    return answer
 
 
 #bin: 10진수->2진수 '0b1010'
