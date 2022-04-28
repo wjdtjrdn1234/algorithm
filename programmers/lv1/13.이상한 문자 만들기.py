@@ -3,36 +3,35 @@ import heapq as hq
 from collections import deque
 from collections import defaultdict
 sys.setrecursionlimit(10**6)
-
-def solution(s):
-    answer = ''
-    new_list = s.split(' ')
-    for word in new_list:
-        for i in range(len(word)):
-            if i%2==0:
-                answer+=word[i].upper()
+def solution(dartResult):
+    n = ''
+    score = []
+    for i in dartResult:
+        if i.isdigit():
+            n += i
+        elif i == 'S':
+            n = int(n)**1
+            score.append(n)
+            n = ''
+        elif i == 'D':
+            n = int(n)**2
+            score.append(n)
+            n = ''
+        elif i == 'T':
+            n = int(n)**3
+            score.append(n)
+            n = ''
+        elif i == '*':
+            if len(score) > 1:
+                score[-2] = score[-2] * 2
+                score[-1] = score[-1] * 2
             else:
-                answer+=word[i].lower()
-        answer+=' '
-    print(answer)
-    return answer[:-1]
-
-# def solution(s, n):
-#     answer = ''
-#     for x in s:
-#         if x ==' ':
-#             answer+=x
-#         elif ord(x)+n<123:
-#             answer += chr(ord(x)+n)
-#         else:
-#             answer += chr(ord(x)+n-26)
-#     return answer
+                score[-1] = score[-1] * 2
+        elif i == '#':
+            score[-1] = score[-1] * -1
+    return sum(score)
 
 
-
-#ord:문자->유니코드 정수 변환
-#123부터 특수기호
-#아스키코드 A:65 ~ z:122
 #bin: 10진수->2진수 '0b1010'
 
 # numbers = [1, 2, 3]
