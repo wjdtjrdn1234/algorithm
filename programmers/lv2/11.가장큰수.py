@@ -4,8 +4,6 @@ from collections import deque
 from collections import defaultdict
 sys.setrecursionlimit(10**6)
 
-import heapq
-
 
 def solution(num):
     answer = ''
@@ -13,8 +11,8 @@ def solution(num):
     num.sort(key = lambda x : x*3, reverse = True) # 3>30
     return str(int(''.join(num)))
 
-#x*3: num의 인수값이 1000 이하이므로 3자리수로 맞춘 뒤, 비교하겠다는 뜻.
 
+#x*3: num의 인수값이 1000 이하이므로 3자리수로 맞춘 뒤, 비교하겠다는 뜻.
 # int로 변환한 뒤, 또 str로 변환해주는 이유?
 # 모든 값이 0일 때(즉, '000'을 처리하기 위해) int로 변환한 뒤, 다시 str로 변환한다
 
