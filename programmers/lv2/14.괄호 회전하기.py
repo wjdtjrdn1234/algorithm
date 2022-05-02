@@ -2,35 +2,45 @@ import sys
 import heapq as hq
 from collections import deque
 from collections import defaultdict
-from itertools import permutations
-import math
 sys.setrecursionlimit(10**6)
 
-
-def solution(num):
-    answer = ''
-    num = list(map(str, num))
-    num.sort(key = lambda x : x*3, reverse = True) # 3>30
-    return str(int(''.join(num)))
-
-#x*3: num의 인수값이 1000 이하이므로 3자리수로 맞춘 뒤, 비교하겠다는 뜻.
-
-# int로 변환한 뒤, 또 str로 변환해주는 이유?
-# 모든 값이 0일 때(즉, '000'을 처리하기 위해) int로 변환한 뒤, 다시 str로 변환한다
+import heapq
 
 
-# import itertools
-# list(itertools.permutations(['1', '2', '3'], 2)) //순열 툴
-# [('1', '2'), ('1', '3'), ('2', '1'), ('2', '3'), ('3', '1'), ('3', '2')]
+def solution(s):
+    answer = 0
+    # 우선 리스트로 변경
+    temp = list(s)
+    # 리스트의 길이만킅 for문을 돌려 리스트 회전
+    for _ in range(len(s)):
+        stack = []
+        #         스택에 아무것도 없으면 괄호를 추가 같으면 제거
+        for j in range(len(temp)):
+            if len(stack) > 0:
+                if stack[-1] == "(" and temp[j] == ")":
+                    stack.pop()
+                elif stack[-1] == "[" and temp[j] == "]":
+                    stack.pop()
+                elif stack[-1] == "{" and temp[j] == "}":
+                    stack.pop()
+                #                 만약에 마지막에 있는 문자가 다르면 추가
+                else:
+                    stack.append(temp[j])
+            #             길이가 0이면 추가
+            else:
+                stack.append(temp[j])
+        #         for문 다 돌았는데 길이 0 이면 정답하나 추가
+        if len(stack) == 0:
+            answer += 1
+        #         첫번째꺼 맨뒤로 보내고 다시 위에꺼 반복
+        temp.append(temp.pop(0))
 
-# for a, b in itertools.permutations(['1', '2', '3'], 2):
-#     print(a+b)
-# 12
-# 13
-# 21
-# 23
-# 31
-# 32
+    return answer
+
+
+
+
+
 
 # zip:
 # print(list(zip([1,2,3], (4,5,6), "abcd")))

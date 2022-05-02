@@ -2,21 +2,35 @@ import sys
 import heapq as hq
 from collections import deque
 from collections import defaultdict
-from itertools import permutations
-import math
 sys.setrecursionlimit(10**6)
 
+import heapq
 
-def solution(num):
-    answer = ''
-    num = list(map(str, num))
-    num.sort(key = lambda x : x*3, reverse = True) # 3>30
-    return str(int(''.join(num)))
 
-#x*3: num의 인수값이 1000 이하이므로 3자리수로 맞춘 뒤, 비교하겠다는 뜻.
+from itertools import permutations
+import math
 
-# int로 변환한 뒤, 또 str로 변환해주는 이유?
-# 모든 값이 0일 때(즉, '000'을 처리하기 위해) int로 변환한 뒤, 다시 str로 변환한다
+def check(n):
+    k = math.sqrt(n)
+    if n < 2:
+        return False
+
+    for i in range(2, int(k)+1):
+        if n % i == 0:
+            return False
+    return True
+
+def solution(numbers):
+    answer = []
+    for k in range(1, len(numbers)+1):
+        perlist = list(map(''.join, permutations(list(numbers), k)))
+        print(perlist)
+        for i in list(set(perlist)):
+            if check(int(i)):
+                answer.append(int(i))
+
+    answer = len(set(answer))
+    return answer
 
 
 # import itertools
@@ -31,6 +45,11 @@ def solution(num):
 # 23
 # 31
 # 32
+
+
+
+
+
 
 # zip:
 # print(list(zip([1,2,3], (4,5,6), "abcd")))

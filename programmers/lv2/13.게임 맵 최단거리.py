@@ -2,35 +2,39 @@ import sys
 import heapq as hq
 from collections import deque
 from collections import defaultdict
-from itertools import permutations
-import math
 sys.setrecursionlimit(10**6)
 
+import heapq
 
-def solution(num):
-    answer = ''
-    num = list(map(str, num))
-    num.sort(key = lambda x : x*3, reverse = True) # 3>30
-    return str(int(''.join(num)))
-
-#x*3: num의 인수값이 1000 이하이므로 3자리수로 맞춘 뒤, 비교하겠다는 뜻.
-
-# int로 변환한 뒤, 또 str로 변환해주는 이유?
-# 모든 값이 0일 때(즉, '000'을 처리하기 위해) int로 변환한 뒤, 다시 str로 변환한다
+from collections import deque
 
 
-# import itertools
-# list(itertools.permutations(['1', '2', '3'], 2)) //순열 툴
-# [('1', '2'), ('1', '3'), ('2', '1'), ('2', '3'), ('3', '1'), ('3', '2')]
+def solution(maps):
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, -1, 1]
 
-# for a, b in itertools.permutations(['1', '2', '3'], 2):
-#     print(a+b)
-# 12
-# 13
-# 21
-# 23
-# 31
-# 32
+    graph = [[-1] * len(maps[0]) for _ in range(len(maps))]
+
+    queue = deque()
+    queue.append([0, 0])
+    graph[0][0] = 1
+
+    while queue:
+        y, x = queue.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+
+            if 0 <= ny < len(maps) and 0 <= nx < len(maps[0]) and maps[ny][nx] == 1:
+                if graph[ny][nx] == -1:
+                    graph[ny][nx] = graph[y][x] + 1
+                    queue.append([ny, nx])
+    return graph[-1][-1]
+
+
+
+
+
 
 # zip:
 # print(list(zip([1,2,3], (4,5,6), "abcd")))
